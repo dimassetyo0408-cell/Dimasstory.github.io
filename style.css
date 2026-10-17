@@ -4,14 +4,50 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f3f6fb;
+  --text: #333333;
+  --heading: #0d2b45;
+  --card: #ffffff;
+  --border: #e3e8ef;
+  --primary: #2f80ed;
+  --primary-dark: #1c63c4;
+  --nav: #0d2b45;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-soft: #162033;
+  --text: #cbd5e1;
+  --heading: #f1f5f9;
+  --card: #1e293b;
+  --border: #334155;
+  --nav: #020617;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 70px;
+}
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: var(--text);
+  background: var(--bg);
+  transition: background 0.3s, color 0.3s;
 }
 
+/* ===== Navbar ===== */
 header {
-  background: #0d2b45;
+  background: var(--nav);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .navbar {
@@ -20,7 +56,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 16px 20px;
 }
 
 .logo {
@@ -29,47 +65,210 @@ header {
   font-weight: bold;
 }
 
+.menu {
+  display: flex;
+  align-items: center;
+}
+
 .menu a {
   color: white;
   text-decoration: none;
   margin-left: 20px;
 }
 
-.hero {
-  min-height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #2f80ed;
-  color: white;
+.menu a:hover {
+  color: #7fb5ff;
 }
 
-.hero-content {
-  max-width: 700px;
-  padding: 20px;
+.theme-btn {
+  margin-left: 20px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #2f80ed, #7c3aed);
+  color: white;
+  padding: 90px 20px 130px;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
 .hero h1 {
   font-size: 52px;
-  margin-bottom: 20px;
+  line-height: 1.2;
+  margin-bottom: 12px;
 }
 
-.hero p {
-  font-size: 20px;
+.accent {
+  color: #ffe08a;
+}
+
+.typing {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-desc {
+  font-size: 18px;
   margin-bottom: 30px;
+  max-width: 520px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .button {
   display: inline-block;
   padding: 12px 25px;
   background: white;
-  color: #2f80ed;
+  color: var(--primary);
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.button-outline {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.button-green {
+  background: #25d366;
+  color: white;
+}
+
+/* Avatar + chip melayang */
+.hero-visual {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+}
+
+.avatar-big {
+  width: 240px;
+  height: 240px;
+  margin: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 6px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96px;
+  font-weight: bold;
+}
+
+.chip {
+  position: absolute;
+  background: white;
+  color: #0d2b45;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+.chip1 { top: 10px; right: 10px; }
+.chip2 { bottom: 40px; left: -10px; animation-delay: 1s; }
+.chip3 { bottom: 0; right: 20px; animation-delay: 2s; }
+
+@keyframes float {
+  50% { transform: translateY(-12px); }
+}
+
+.wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+.wave path {
+  fill: var(--bg);
+}
+
+/* ===== Statistik ===== */
+.stats {
+  max-width: 900px;
+  margin: -20px auto 0;
+  padding: 0 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  text-align: center;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.stat .count {
+  display: block;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.stat small {
+  font-size: 14px;
+}
+
+/* ===== Bagian umum ===== */
 .section {
   max-width: 1000px;
   margin: auto;
@@ -80,52 +279,65 @@ header {
 .section h2 {
   font-size: 35px;
   margin-bottom: 20px;
-}
-
-footer {
-  background: #0d2b45;
-  color: white;
-  text-align: center;
-  padding: 25px;
-}
-
-/* ===== Tambahan ===== */
-html {
-  scroll-behavior: smooth;
-}
-
-section {
-  scroll-margin-top: 70px;
-}
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.menu a:hover {
-  color: #7fb5ff;
-}
-
-.avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #2f80ed;
-  color: white;
-  font-size: 48px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
+  color: var(--heading);
 }
 
 .section-full {
-  background: #f3f6fb;
+  background: var(--bg-soft);
 }
 
+/* Animasi muncul */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Keahlian ===== */
+.skills {
+  max-width: 600px;
+  margin: 30px auto 0;
+  text-align: left;
+}
+
+.skill {
+  margin-bottom: 20px;
+}
+
+.skill-top {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: var(--heading);
+}
+
+.bar {
+  height: 12px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #2f80ed, #7c3aed);
+  border-radius: 999px;
+  transition: width 1.2s ease;
+}
+
+.reveal.show .bar span {
+  width: var(--w);
+}
+
+/* ===== Kartu proyek ===== */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -135,8 +347,8 @@ header {
 }
 
 .card {
-  background: white;
-  border: 1px solid #e3e8ef;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 24px;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -144,14 +356,20 @@ header {
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .card h3 {
-  color: #0d2b45;
+  color: var(--heading);
   margin-bottom: 8px;
 }
 
+/* ===== Kontak ===== */
 .contact-buttons {
   display: flex;
   gap: 12px;
@@ -160,29 +378,47 @@ header {
   margin-top: 24px;
 }
 
-.btn-solid {
-  display: inline-block;
-  padding: 12px 28px;
-  background: #2f80ed;
+.section-full .button:not(.button-green) {
+  background: var(--primary);
   color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
 }
 
-.btn-solid:hover {
-  background: #1c63c4;
+/* ===== Footer ===== */
+footer {
+  background: var(--nav);
+  color: white;
+  text-align: center;
+  padding: 25px;
 }
 
-@media (max-width: 700px) {
+/* ===== HP / layar kecil ===== */
+@media (max-width: 800px) {
+  .hero-inner {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-desc {
+    margin: 0 auto 30px;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .hero h1 {
+    font-size: 38px;
+  }
+  .typing {
+    font-size: 20px;
+  }
   .navbar {
     flex-direction: column;
     gap: 10px;
   }
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 0;
+  }
   .menu a {
     margin: 0 8px;
-  }
-  .hero h1 {
-    font-size: 36px;
   }
 }
