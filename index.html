@@ -37,11 +37,47 @@
       </div>
 
       <div class="hero-visual">
-        <div class="avatar-big">DMS</div>
-        <span class="chip chip1">HTML</span>
-        <span class="chip chip2">CSS</span>
-        <span class="chip chip3">GitHub</span>
+  <div class="iphone">
+    <div class="screen">
+
+      <div class="island" id="island">
+        <span class="island-text" id="islandText"></span>
+        <span class="island-dot"></span>
       </div>
+
+      <div class="status">
+        <span>9:41</span>
+        <span>5G 🔋</span>
+      </div>
+
+      <div class="app">
+        <div class="app-avatar">D</div>
+        <h4>Nama Kamu</h4>
+        <p class="app-role">Pembelajar Web</p>
+
+        <div class="app-stats">
+          <div><b>3</b><small>Proyek</small></div>
+          <div><b>10</b><small>Skill</small></div>
+          <div><b>100%</b><small>Semangat</small></div>
+        </div>
+
+        <div class="app-tags">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>GitHub</span>
+        </div>
+
+        <a href="#contact" class="app-btn">Hubungi Saya</a>
+      </div>
+
+      <div class="home-bar"></div>
+    </div>
+  </div>
+
+  <span class="chip chip1">HTML</span>
+  <span class="chip chip2">CSS</span>
+  <span class="chip chip3">GitHub</span>
+</div>
     </div>
 
     <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
@@ -192,6 +228,23 @@
       }
       try { localStorage.setItem("theme", dark ? "light" : "dark"); } catch (e) {}
     });
+
+    // Dynamic Island
+const island = document.getElementById("island");
+const islandText = document.getElementById("islandText");
+const msgs = ["🎵 Lagi ngoding...", "📩 1 pesan baru", "🚀 Website live!"];
+let m = 0;
+
+function showIsland() {
+  islandText.textContent = msgs[m];
+  m = (m + 1) % msgs.length;
+  island.classList.add("open");
+  setTimeout(() => island.classList.remove("open"), 2500);
+}
+
+island.addEventListener("click", showIsland);
+setTimeout(showIsland, 1500);
+setInterval(showIsland, 6000);
   </script>
 
 </body>
