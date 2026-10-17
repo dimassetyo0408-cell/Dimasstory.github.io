@@ -17,71 +17,104 @@
         <a href="#skills">Keahlian</a>
         <a href="#projects">Proyek</a>
         <a href="#contact">Kontak</a>
+        <button id="themeBtn" class="theme-btn" aria-label="Ganti tema">🌙</button>
       </div>
     </nav>
   </header>
 
+  <!-- HERO -->
   <section id="home" class="hero">
-    <div class="hero-content">
-      <h1>Selamat Datang</h1>
-      <p>Website pertama saya menggunakan GitHub Pages.</p>
-      <a href="#about" class="button">Pelajari Lebih Lanjut</a>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="badge">👋 Halo, selamat datang</span>
+        <h1>Saya <span class="accent">Nama Kamu</span></h1>
+        <p class="typing">Saya seorang <span id="typed"></span><span class="cursor">|</span></p>
+        <p class="hero-desc">Website pertama saya, dibuat dengan HTML, CSS, dan GitHub Pages.</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="button">Lihat Proyek</a>
+          <a href="#contact" class="button button-outline">Hubungi Saya</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="avatar-big">D</div>
+        <span class="chip chip1">HTML</span>
+        <span class="chip chip2">CSS</span>
+        <span class="chip chip3">GitHub</span>
+      </div>
     </div>
+
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,40 C360,100 1080,-20 1440,40 L1440,80 L0,80 Z"></path>
+    </svg>
   </section>
 
-  <section id="about" class="section">
-    <div class="avatar">D</div>
+  <!-- STATISTIK -->
+  <section class="stats">
+    <div class="stat reveal"><span class="count" data-target="3">0</span><small>Proyek</small></div>
+    <div class="stat reveal"><span class="count" data-target="10">0</span><small>Hal yang dipelajari</small></div>
+    <div class="stat reveal"><span class="count" data-target="100">0</span><small>Semangat (%)</small></div>
+  </section>
+
+  <!-- TENTANG -->
+  <section id="about" class="section reveal">
     <h2>Tentang Saya</h2>
-    <p>Halo! Saya Dimas, saya sedang belajar membuat website dengan HTML, CSS, dan GitHub Pages.</p>
+    <p>Halo! Saya sedang belajar membuat website dengan HTML, CSS, dan GitHub Pages. Ganti teks ini dengan ceritamu sendiri.</p>
   </section>
 
+  <!-- KEAHLIAN -->
   <div class="section-full">
-    <section id="skills" class="section">
+    <section id="skills" class="section reveal">
       <h2>Keahlian</h2>
       <p>Hal-hal yang sedang saya pelajari.</p>
-      <div class="cards">
-        <div class="card">
-          <h3>HTML</h3>
-          <p>Membuat struktur halaman website.</p>
+      <div class="skills">
+        <div class="skill">
+          <div class="skill-top"><span>HTML</span><span>80%</span></div>
+          <div class="bar"><span style="--w:80%"></span></div>
         </div>
-        <div class="card">
-          <h3>CSS</h3>
-          <p>Mengatur warna, tata letak, dan tampilan.</p>
+        <div class="skill">
+          <div class="skill-top"><span>CSS</span><span>65%</span></div>
+          <div class="bar"><span style="--w:65%"></span></div>
         </div>
-        <div class="card">
-          <h3>GitHub</h3>
-          <p>Menyimpan kode dan menerbitkan website.</p>
+        <div class="skill">
+          <div class="skill-top"><span>GitHub</span><span>50%</span></div>
+          <div class="bar"><span style="--w:50%"></span></div>
         </div>
       </div>
     </section>
   </div>
 
-  <section id="projects" class="section">
+  <!-- PROYEK -->
+  <section id="projects" class="section reveal">
     <h2>Proyek</h2>
     <p>Karya yang pernah saya buat.</p>
     <div class="cards">
       <div class="card">
+        <div class="card-icon">🌐</div>
         <h3>Website Pertama</h3>
         <p>Halaman ini, dibuat dengan HTML dan CSS.</p>
       </div>
       <div class="card">
+        <div class="card-icon">🎨</div>
         <h3>Proyek Kedua</h3>
         <p>Ganti dengan proyekmu berikutnya.</p>
       </div>
       <div class="card">
+        <div class="card-icon">🚀</div>
         <h3>Proyek Ketiga</h3>
         <p>Ganti dengan proyekmu berikutnya.</p>
       </div>
     </div>
   </section>
 
+  <!-- KONTAK -->
   <div class="section-full">
-    <section id="contact" class="section">
+    <section id="contact" class="section reveal">
       <h2>Kontak</h2>
       <p>Mau ngobrol atau bekerja sama? Hubungi saya lewat:</p>
       <div class="contact-buttons">
-        <a class="btn-solid" href="mailto:dimassetyo0408@gmail.com">Kirim Email</a>
-        <a class="btn-solid" href="https://wa.me/6285283375203" target="_blank">WhatsApp</a>
+        <a class="button" href="mailto:email@example.com">✉️ Kirim Email</a>
+        <a class="button button-green" href="https://wa.me/6281234567890" target="_blank">💬 WhatsApp</a>
       </div>
     </section>
   </div>
@@ -89,6 +122,77 @@
   <footer>
     <p>© 2026 Website Saya</p>
   </footer>
+
+  <script>
+    // Efek mengetik (ganti kata-kata sesukamu)
+    const words = ["pembelajar web", "pembuat konten", "penggemar teknologi"];
+    const typedEl = document.getElementById("typed");
+    let w = 0, c = 0, del = false;
+
+    function type() {
+      const word = words[w];
+      typedEl.textContent = word.slice(0, c);
+      if (!del && c === word.length) {
+        del = true;
+        setTimeout(type, 1200);
+        return;
+      }
+      if (del && c === 0) {
+        del = false;
+        w = (w + 1) % words.length;
+      }
+      c += del ? -1 : 1;
+      setTimeout(type, del ? 50 : 100);
+    }
+    type();
+
+    // Animasi muncul saat di-scroll + hitung angka
+    function countUp(el) {
+      const target = +el.dataset.target;
+      let n = 0;
+      const step = Math.max(1, Math.ceil(target / 40));
+      const timer = setInterval(() => {
+        n += step;
+        if (n >= target) { n = target; clearInterval(timer); }
+        el.textContent = n;
+      }, 40);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          entry.target.querySelectorAll(".count").forEach(countUp);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    // Mode gelap / terang
+    const root = document.documentElement;
+    const btn = document.getElementById("themeBtn");
+
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        root.setAttribute("data-theme", "dark");
+        btn.textContent = "☀️";
+      }
+    } catch (e) {}
+
+    btn.addEventListener("click", () => {
+      const dark = root.getAttribute("data-theme") === "dark";
+      if (dark) {
+        root.removeAttribute("data-theme");
+        btn.textContent = "🌙";
+      } else {
+        root.setAttribute("data-theme", "dark");
+        btn.textContent = "☀️";
+      }
+      try { localStorage.setItem("theme", dark ? "light" : "dark"); } catch (e) {}
+    });
+  </script>
 
 </body>
 </html>
