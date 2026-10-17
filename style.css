@@ -101,4 +101,507 @@ header {
 }
 
 .hero-inner {
-  max-width:
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 52px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.accent {
+  color: #ffe08a;
+}
+
+.typing {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-desc {
+  font-size: 18px;
+  margin-bottom: 30px;
+  max-width: 520px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 25px;
+  background: white;
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.button-outline {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.button-green {
+  background: #25d366;
+  color: white;
+}
+
+.wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+.wave path {
+  fill: var(--bg);
+}
+
+/* ===== iPhone + Dynamic Island ===== */
+.hero-visual {
+  position: relative;
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.iphone {
+  position: relative;
+  width: 260px;
+  height: 530px;
+  background: #0b0b0d;
+  border-radius: 48px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 2px #3a3a3f,
+    0 30px 60px rgba(0, 0, 0, 0.45);
+  animation: phoneFloat 4s ease-in-out infinite;
+}
+
+@keyframes phoneFloat {
+  50% { transform: translateY(-10px); }
+}
+
+.iphone::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 110px;
+  width: 4px;
+  height: 60px;
+  background: #3a3a3f;
+  border-radius: 3px 0 0 3px;
+}
+
+.iphone::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 140px;
+  width: 4px;
+  height: 85px;
+  background: #3a3a3f;
+  border-radius: 0 3px 3px 0;
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 38px;
+  background: linear-gradient(160deg, #1e293b, #0f172a);
+  color: white;
+  overflow: hidden;
+}
+
+.island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88px;
+  height: 26px;
+  background: #000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: width 0.4s cubic-bezier(0.3, 1.4, 0.5, 1),
+              height 0.4s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+.island.open {
+  width: 196px;
+  height: 38px;
+}
+
+.island-text {
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.island.open .island-text {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.island-dot {
+  position: absolute;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #14213d;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 26px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.app {
+  padding: 60px 20px 0;
+  text-align: center;
+}
+
+.app-avatar {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2f80ed, #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.app h4 {
+  font-size: 20px;
+}
+
+.app-role {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 18px;
+}
+
+.app-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.app-stats div {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 4px;
+}
+
+.app-stats b {
+  display: block;
+  font-size: 16px;
+}
+
+.app-stats small {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.app-tags {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.app-tags span {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(47, 128, 237, 0.25);
+  color: #9cc4ff;
+}
+
+.app-btn {
+  display: block;
+  background: #2f80ed;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.home-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Chip melayang di sekitar HP */
+.chip {
+  position: absolute;
+  background: white;
+  color: #0d2b45;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+.chip1 { top: 70px; right: -60px; }
+.chip2 { bottom: 140px; left: -60px; animation-delay: 1s; }
+.chip3 { bottom: 50px; right: -50px; animation-delay: 2s; }
+
+@keyframes float {
+  50% { transform: translateY(-12px); }
+}
+
+/* ===== Statistik ===== */
+.stats {
+  max-width: 900px;
+  margin: -20px auto 0;
+  padding: 0 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  text-align: center;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.stat .count {
+  display: block;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.stat small {
+  font-size: 14px;
+}
+
+/* ===== Bagian umum ===== */
+.section {
+  max-width: 1000px;
+  margin: auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 35px;
+  margin-bottom: 20px;
+  color: var(--heading);
+}
+
+.section-full {
+  background: var(--bg-soft);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Keahlian ===== */
+.skills {
+  max-width: 600px;
+  margin: 30px auto 0;
+  text-align: left;
+}
+
+.skill {
+  margin-bottom: 20px;
+}
+
+.skill-top {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: var(--heading);
+}
+
+.bar {
+  height: 12px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #2f80ed, #7c3aed);
+  border-radius: 999px;
+  transition: width 1.2s ease;
+}
+
+.reveal.show .bar span {
+  width: var(--w);
+}
+
+/* ===== Kartu proyek ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+  text-align: left;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  color: var(--heading);
+  margin-bottom: 8px;
+}
+
+/* ===== Kontak ===== */
+.contact-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.section-full .button:not(.button-green) {
+  background: var(--primary);
+  color: white;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: var(--nav);
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+/* ===== HP / layar kecil ===== */
+@media (max-width: 800px) {
+  .hero-inner {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-desc {
+    margin: 0 auto 30px;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .hero h1 {
+    font-size: 38px;
+  }
+  .typing {
+    font-size: 20px;
+  }
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 0;
+  }
+  .menu a {
+    margin: 0 8px;
+  }
+  .iphone {
+    margin: 0 auto;
+  }
+  .chip1 { right: -20px; }
+  .chip2 { left: -20px; }
+  .chip3 { right: -10px; }
+}
