@@ -159,6 +159,13 @@
     <p>© 2026 Website Saya</p>
   </footer>
 
+    <div class="visitor">
+    <span class="live-dot"></span>
+    <span>Pengunjung: <b id="visitCount">...</b></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
+  
   <script>
     // Efek mengetik (MARI LIHAT!!)
     const words = ["pembelajar web", "pembuat konten", "penggemar teknologi"];
@@ -245,6 +252,30 @@ function showIsland() {
 island.addEventListener("click", showIsland);
 setTimeout(showIsland, 1500);
 setInterval(showIsland, 6000);
+    // Penghitung pengunjung
+    (async function () {
+      const el = document.getElementById("visitCount");
+      try {
+        const counter = new Counter({ workspace: "dimasstory-web" });
+        let seen = false;
+        try { seen = localStorage.getItem("visited") === "1"; } catch (e) {}
+
+        let res;
+        if (seen) {
+          try { res = await counter.get("pengunjung"); }
+          catch (e) { res = await counter.up("pengunjung"); }
+        } else {
+          res = await counter.up("pengunjung");
+          try { localStorage.setItem("visited", "1"); } catch (e) {}
+        }
+
+        const n = res.value ?? res.Count ?? res.count;
+        el.textContent = n;
+      } catch (e) {
+        el.textContent = "-";
+      }
+    })();
+    
   </script>
 
 </body>
