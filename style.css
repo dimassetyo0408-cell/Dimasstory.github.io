@@ -1137,3 +1137,28 @@ html:not(.js) .ruler span {
     scroll-behavior: auto;
   }
 }
+
+/* ===== Kartu proyek yang bisa diklik ===== */
+a.sheet-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+a.sheet-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--line);
+}
+
+.sheet-link h3 {
+  margin-top: 0;
+}
+
+.sheet-go {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 3px solid var(--marker);
+}
