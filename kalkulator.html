@@ -1,1 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator — Dimas</title>
+  <meta name="description" content="Kalkulator sederhana buatan Dimas, dibuat dengan HTML, CSS, dan JavaScript.">
+  <meta name="theme-color" content="#0e2a6e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧮%3C/text%3E%3C/svg%3E">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5">
+
+  <style>
+    /* Menu sederhana untuk halaman ini */
+    .nav-simple { display: flex; align-items: center; gap: 8px; }
+    .nav-simple a {
+      padding: 6px 12px;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-simple a:hover { color: var(--ink); border-bottom-color: var(--marker); }
+    .nav-simple .theme-btn { margin: 0 0 0 4px; align-self: auto; }
+
+    /* Tata letak halaman */
+    .calc-page {
+      width: min(1072px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 56px 0 80px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 56px;
+      align-items: start;
+    }
+    .calc-intro h1 {
+      margin-bottom: 16px;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+    .calc-desc { max-width: 46ch; }
+    .calc-intro .notes { margin-top: 28px; }
+    .calc-intro .btn { margin-top: 28px; }
+
+    /* Kalkulator */
+    .calc { padding: 20px; box-shadow: 8px 8px 0 var(--line); }
+    .display {
+      min-height: 100px;
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: right;
+      overflow: hidden;
+      background: var(--line-faint);
+      border: 1px solid var(--line);
+    }
+    .expr { min-height: 1.5em; font-size: 0.95rem; color: var(--ink-soft); }
+    .cur {
+      font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+    .cur.small { font-size: 1.6rem; }
+
+    .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .keys button {
+      height: 60px;
+      font: inherit;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .keys button:hover { background: var(--line-faint); }
+    .keys button:active { transform: translateY(2px); }
+    .keys .fn,
+    .keys .op { background: var(--line-faint); }
+    .keys .op.on { background: var(--marker); color: var(--on-marker); border-color: transparent; }
+    .keys .eq { background: var(--marker); color: var(--on-marker); border-color: transparent; }
+    .keys .eq:hover { background: var(--marker); filter: brightness(1.06); }
+    .keys .zero { grid-column: span 2; }
+
+    @media (max-width: 800px) {
+      .calc-page { grid-template-columns: 1fr; gap: 36px; padding-top: 40px; }
+      .calc { max-width: 400px; width: 100%; margin: 0 auto; }
+      .calc-intro { order: 2; }
+    }
+    @media (max-width: 600px) {
+      .calc-intro .notes > div { grid-template-columns: 1fr; gap: 2px; }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var r = document.documentElement, t = null;
+      r.classList.add("js");
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      r.setAttribute("data-theme", t === "light" ? "light" : "dark");
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigasi">
+      <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true"></span>Dimas</a>
+      <div class="nav-simple">
+        <a href="index.html#projects">Semua proyek</a>
+        <button id="themeBtn" class="theme-btn" aria-label="Ganti tema">☀️</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="calc-page">
+
+    <div class="calc-intro">
+      <h1>Kalkulator</h1>
+      <p class="calc-desc">
+        Proyek kedua saya: kalkulator sederhana untuk menjumlah, mengurang, mengali, dan membagi.
+        Bisa dipakai lewat tombol maupun keyboard.
+      </p>
+      <ul class="tags">
+        <li>HTML</li><li>CSS</li><li>JavaScript</li>
+      </ul>
+
+      <dl class="notes">
+        <div><dt>Angka dan operator</dt><dd>Ketuk tombol atau ketik di keyboard</dd></div>
+        <div><dt>Enter</dt><dd>Sama dengan (=)</dd></div>
+        <div><dt>Backspace</dt><dd>Hapus satu angka</dd></div>
+        <div><dt>Esc</dt><dd>Hapus semuanya (AC)</dd></div>
+      </dl>
+
+      <a class="btn btn-ghost" href="index.html#projects">Kembali ke proyek</a>
+    </div>
+
+    <div class="sheet calc">
+      <div class="display" aria-live="polite">
+        <div class="expr" id="expr"></div>
+        <div class="cur" id="cur">0</div>
+      </div>
+
+      <div class="keys" id="keys">
+        <button class="fn" data-act="clear" aria-label="Hapus semua">AC</button>
+        <button class="fn" data-act="back" aria-label="Hapus satu angka">⌫</button>
+        <button class="fn" data-act="percent" aria-label="Persen">%</button>
+        <button class="op" data-op="/" aria-label="Bagi">÷</button>
+
+        <button data-n="7">7</button>
+        <button data-n="8">8</button>
+        <button data-n="9">9</button>
+        <button class="op" data-op="*" aria-label="Kali">×</button>
+
+        <button data-n="4">4</button>
+        <button data-n="5">5</button>
+        <button data-n="6">6</button>
+        <button class="op" data-op="-" aria-label="Kurang">−</button>
+
+        <button data-n="1">1</button>
+        <button data-n="2">2</button>
+        <button data-n="3">3</button>
+        <button class="op" data-op="+" aria-label="Tambah">+</button>
+
+        <button class="zero" data-n="0">0</button>
+        <button data-act="dot" aria-label="Koma">,</button>
+        <button class="eq" data-act="equals" aria-label="Sama dengan">=</button>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="foot-note">Proyek kedua. Dibuat dengan HTML, CSS, dan JavaScript.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+
+      // ===== Mode gelap / terang =====
+      var themeBtn = document.getElementById("themeBtn");
+      function syncIcon() {
+        themeBtn.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+      }
+      syncIcon();
+      themeBtn.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        syncIcon();
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+
+      // ===== Kalkulator =====
+      var elCur = document.getElementById("cur");
+      var elExpr = document.getElementById("expr");
+      var keys = document.getElementById("keys");
+
+      var cur = "0";      // angka yang sedang diketik / hasil
+      var prev = null;    // angka pertama
+      var op = null;      // operator yang dipilih
+      var fresh = false;  // true = angka berikutnya memulai angka baru
+      var expr = "";      // teks kecil di atas layar
+      var error = false;
+      var sym = { "+": "+", "-": "−", "*": "×", "/": "÷" };
+
+      function show(s) { return s.replace(".", ","); }
+
+      function clean(n) {
+        if (!isFinite(n)) return "0";
+        return String(parseFloat(n.toPrecision(12)));
+      }
+
+      function update() {
+        if (error) {
+          elCur.textContent = "Tidak bisa ÷ 0";
+          elCur.classList.add("small");
+        } else {
+          elCur.textContent = show(cur);
+          elCur.classList.toggle("small", cur.length > 9);
+        }
+        elExpr.textContent = expr;
+        keys.querySelectorAll("[data-op]").forEach(function (b) {
+          b.classList.toggle("on", op !== null && fresh && b.dataset.op === op);
+        });
+      }
+
+      function clearAll() {
+        cur = "0"; prev = null; op = null; fresh = false; expr = ""; error = false;
+        update();
+      }
+
+      function showError() {
+        error = true; expr = ""; prev = null; op = null;
+        update();
+      }
+
+      function compute(a, b, o) {
+        a = parseFloat(a); b = parseFloat(b);
+        if (o === "+") return a + b;
+        if (o === "-") return a - b;
+        if (o === "*") return a * b;
+        if (o === "/") return b === 0 ? null : a / b;
+        return b;
+      }
+
+      function inputDigit(d) {
+        if (error) clearAll();
+        if (fresh) { cur = "0"; fresh = false; }
+        if (cur === "0") {
+          cur = d;
+        } else if (cur.replace("-", "").replace(".", "").length < 12) {
+          cur += d;
+        }
+        update();
+      }
+
+      function inputDot() {
+        if (error) clearAll();
+        if (fresh) { cur = "0"; fresh = false; }
+        if (cur.indexOf(".") === -1) cur += ".";
+        update();
+      }
+
+      function chooseOp(o) {
+        if (error) return;
+        if (op !== null && !fresh) {
+          var r = compute(prev, cur, op);
+          if (r === null) { showError(); return; }
+          cur = clean(r);
+        } else {
+          cur = clean(parseFloat(cur));
+        }
+        prev = cur; op = o; fresh = true;
+        expr = show(prev) + " " + sym[o];
+        update();
+      }
+
+      function equals() {
+        if (error || op === null) return;
+        var b = clean(parseFloat(cur));
+        var r = compute(prev, b, op);
+        if (r === null) { showError(); return; }
+        expr = show(prev) + " " + sym[op] + " " + show(b) + " =";
+        cur = clean(r); prev = null; op = null; fresh = true;
+        update();
+      }
+
+      function percent() {
+        if (error) return;
+        cur = clean(parseFloat(cur) / 100);
+        fresh = true;
+        update();
+      }
+
+      function backspace() {
+        if (error) { clearAll(); return; }
+        if (fresh) return;
+        cur = (cur.length > 1 && !(cur.length === 2 && cur[0] === "-")) ? cur.slice(0, -1) : "0";
+        update();
+      }
+
+      keys.addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (!b) return;
+        if (b.dataset.n !== undefined) inputDigit(b.dataset.n);
+        else if (b.dataset.op) chooseOp(b.dataset.op);
+        else if (b.dataset.act === "dot") inputDot();
+        else if (b.dataset.act === "equals") equals();
+        else if (b.dataset.act === "clear") clearAll();
+        else if (b.dataset.act === "back") backspace();
+        else if (b.dataset.act === "percent") percent();
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        var t = e.target;
+        if (t.id === "themeBtn" || t.tagName === "A") return;
+        var k = e.key;
+        if (k.length === 1 && k >= "0" && k <= "9") { inputDigit(k); }
+        else if (k === "." || k === ",") { inputDot(); }
+        else if (k === "+" || k === "-" || k === "*" || k === "/") { e.preventDefault(); chooseOp(k); }
+        else if (k === "Enter" || k === "=") { e.preventDefault(); equals(); }
+        else if (k === "Backspace") { backspace(); }
+        else if (k === "Escape") { clearAll(); }
+        else if (k === "%") { percent(); }
+      });
+
+      update();
+    })();
+  </script>
+
+</body>
+</html>
