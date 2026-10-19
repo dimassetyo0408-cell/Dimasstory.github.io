@@ -3,279 +3,399 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Saya</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <title>Dimas — Portofolio</title>
+  <meta name="description" content="Portofolio Dimas: pembelajar web yang membangun proyek dengan HTML, CSS, dan GitHub Pages.">
+  <meta name="theme-color" content="#0e2a6e">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dimas — Portofolio">
+  <meta property="og:description" content="Pembelajar web yang membangun proyek dengan HTML, CSS, dan GitHub Pages.">
+  <meta property="og:url" content="https://dimassetyo0408-cell.github.io/Dimasstory.github.io/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4">
+
+  <!-- Atur tema sebelum halaman tampil supaya tidak berkedip -->
+  <script>
+    (function () {
+      var r = document.documentElement, t = null;
+      r.classList.add("js");
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      r.setAttribute("data-theme", t === "light" ? "light" : "dark");
+    })();
+  </script>
 </head>
 <body>
 
-  <header>
-    <nav class="navbar">
-      <div class="logo">Website Saya</div>
-      <div class="menu">
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigasi utama">
+      <a class="logo" href="#home"><span class="logo-mark" aria-hidden="true"></span>Dimas</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="menu" id="menu">
         <a href="#home">Home</a>
         <a href="#about">Tentang</a>
         <a href="#skills">Keahlian</a>
         <a href="#projects">Proyek</a>
         <a href="#contact">Kontak</a>
-        <button id="themeBtn" class="theme-btn" aria-label="Ganti tema">🌙</button>
+        <button id="themeBtn" class="theme-btn" aria-label="Ganti tema">☀️</button>
       </div>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <span class="badge">👋 Halo, selamat datang</span>
-        <h1>Saya <span class="accent">Dimas</span></h1>
-        <p class="typing">Saya seorang <span id="typed"></span><span class="cursor">|</span></p>
-        <p class="hero-desc">Website pertama saya, dibuat dengan HTML, CSS, dan GitHub Pages.</p>
-        <div class="hero-buttons">
-          <a href="#projects" class="button">Lihat Proyek</a>
-          <a href="#contact" class="button button-outline">Hubungi Saya</a>
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero">
+      <div class="hero-inner">
+
+        <div class="hero-text">
+          <!-- UBAH: nama kamu -->
+          <h1 class="enter" style="--i:0">Halo, saya Dimas.</h1>
+
+          <p class="typing enter" style="--i:1">
+            <span class="sr-only">Saya seorang pembelajar web, pembuat konten, dan penggemar teknologi.</span>
+            <span aria-hidden="true">Saya seorang <span class="typed-wrap"><span id="typed"></span><span class="cursor"></span></span></span>
+          </p>
+
+          <p class="hero-desc enter" style="--i:2">
+            Ini website pertama saya, dibangun dengan HTML, CSS, dan GitHub Pages, dan masih terus saya perbaiki.
+          </p>
+
+          <div class="hero-buttons enter" style="--i:3">
+            <a href="#projects" class="btn btn-primary">Lihat proyek</a>
+            <a href="#contact" class="btn btn-ghost">Hubungi saya</a>
+          </div>
+
+          <!-- UBAH: angka-angka ini, sesuaikan dengan yang sebenarnya -->
+          <dl class="spec enter" style="--i:4">
+            <div><dt>Proyek rilis</dt><dd>1</dd></div>
+            <div><dt>Teknologi dipelajari</dt><dd>3</dd></div>
+            <div><dt>Semangat</dt><dd>100%</dd></div>
+          </dl>
         </div>
+
+        <div class="hero-visual enter" style="--i:2">
+          <div class="dim dim-w" aria-hidden="true"><span>270 px</span></div>
+          <div class="dim dim-h" aria-hidden="true"><span>540 px</span></div>
+
+          <div class="iphone">
+            <div class="screen">
+              <div class="island" id="island" role="button" tabindex="0" aria-label="Tampilkan pesan dari Dynamic Island">
+                <span class="island-text" id="islandText"></span>
+                <span class="island-dot"></span>
+              </div>
+
+              <div class="status-bar">
+                <span>9:41</span>
+                <span>5G 🔋</span>
+              </div>
+
+              <div class="app">
+                <div class="app-avatar">D</div>
+                <div class="app-name">Dimas</div>
+                <div class="app-role">Pembelajaran web</div>
+
+                <div class="app-stats">
+                  <div><b>1</b><small>Proyek</small></div>
+                  <div><b>3</b><small>Teknologi</small></div>
+                  <div><b>100%</b><small>Semangat</small></div>
+                </div>
+
+                <div class="app-tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>GitHub</span>
+                </div>
+
+                <a href="#contact" class="app-btn">Hubungi saya</a>
+              </div>
+
+              <div class="home-bar"></div>
+            </div>
+          </div>
+
+          <p class="hint">Coba ketuk bagian atas layar.</p>
+
+          <ul class="callouts">
+            <li><b>HTML</b>kerangka halaman</li>
+            <li><b>CSS</b>warna dan tata letak</li>
+            <li><b>GitHub Pages</b>tempat tayang</li>
+          </ul>
+        </div>
+
       </div>
+    </section>
 
-      <div class="hero-visual">
-  <div class="iphone">
-    <div class="screen">
-
-      <div class="island" id="island">
-        <span class="island-text" id="islandText"></span>
-        <span class="island-dot"></span>
+    <!-- ===== TENTANG ===== -->
+    <section id="about" class="section">
+      <div class="section-head">
+        <h2>Tentang saya</h2>
       </div>
-
-      <div class="status">
-        <span>9:41</span>
-        <span>5G 🔋</span>
+      <div class="section-body">
+        <!-- UBAH: ceritakan dirimu dengan kata-katamu sendiri -->
+        <p class="lead">
+          Halo! Saya Dimas, sedang belajar membuat website dengan HTML, CSS, dan GitHub Pages.
+          Setiap proyek kecil membawa saya selangkah lebih dekat ke website yang rapi dan enak dilihat.
+        </p>
+        <dl class="notes">
+          <div><dt>Sedang dipelajari</dt><dd>HTML, CSS, JavaScript, dan GitHub Pages</dd></div>
+          <div><dt>Cara belajar</dt><dd>Bikin yang kecil, tayangkan, lalu perbaiki</dd></div>
+          <div><dt>Berikutnya</dt><dd>Menambah proyek nyata ke halaman ini</dd></div>
+        </dl>
       </div>
+    </section>
 
-      <div class="app">
-        <div class="app-avatar">D</div>
-        <h4>DIMASS</h4>
-        <p class="app-role">Pembelajaran Web</p>
-
-        <div class="app-stats">
-          <div><b>3</b><small>Proyek</small></div>
-          <div><b>10</b><small>Skill</small></div>
-          <div><b>100%</b><small>Semangat</small></div>
-        </div>
-
-        <div class="app-tags">
-          <span>HTML</span>
-          <span>CSS</span>
-          <span>GitHub</span>
-        </div>
-
-        <a href="#contact" class="app-btn">Hubungi Saya</a>
+    <!-- ===== KEAHLIAN ===== -->
+    <section id="skills" class="section">
+      <div class="section-head">
+        <h2>Keahlian</h2>
+        <p>Hal-hal yang sedang saya pelajari.</p>
       </div>
-
-      <div class="home-bar"></div>
-    </div>
-  </div>
-
-  <span class="chip chip1">HTML</span>
-  <span class="chip chip2">CSS</span>
-  <span class="chip chip3">GitHub</span>
-</div>
-    </div>
-
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,40 C360,100 1080,-20 1440,40 L1440,80 L0,80 Z"></path>
-    </svg>
-  </section>
-
-  <!-- STATISTIK -->
-  <section class="stats">
-    <div class="stat reveal"><span class="count" data-target="3">0</span><small>Proyek</small></div>
-    <div class="stat reveal"><span class="count" data-target="10">0</span><small>Hal yang dipelajari</small></div>
-    <div class="stat reveal"><span class="count" data-target="100">0</span><small>Semangat (%)</small></div>
-  </section>
-
-  <!-- TENTANG -->
-  <section id="about" class="section reveal">
-    <h2>Tentang Saya</h2>
-    <p>Halo! Saya sedang belajar membuat website dengan HTML, CSS, dan GitHub Pages.</p>
-  </section>
-
-  <!-- KEAHLIAN -->
-  <div class="section-full">
-    <section id="skills" class="section reveal">
-      <h2>Keahlian</h2>
-      <p>Hal-hal yang sedang saya pelajari.</p>
-      <div class="skills">
-        <div class="skill">
-          <div class="skill-top"><span>HTML</span><span>80%</span></div>
-          <div class="bar"><span style="--w:80%"></span></div>
-        </div>
-        <div class="skill">
-          <div class="skill-top"><span>CSS</span><span>65%</span></div>
-          <div class="bar"><span style="--w:65%"></span></div>
-        </div>
-        <div class="skill">
-          <div class="skill-top"><span>GitHub</span><span>50%</span></div>
-          <div class="bar"><span style="--w:50%"></span></div>
+      <div class="section-body">
+        <!-- UBAH: nama dan persentase. Salin satu blok .skill untuk menambah keahlian -->
+        <div class="skills" id="skillList">
+          <div class="skill">
+            <div class="skill-top"><span>HTML</span><span>80%</span></div>
+            <div class="ruler" role="img" aria-label="HTML 80 persen" style="--w:80%"><span></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill-top"><span>CSS</span><span>65%</span></div>
+            <div class="ruler" role="img" aria-label="CSS 65 persen" style="--w:65%"><span></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill-top"><span>GitHub</span><span>50%</span></div>
+            <div class="ruler" role="img" aria-label="GitHub 50 persen" style="--w:50%"><span></span></div>
+          </div>
         </div>
       </div>
     </section>
-  </div>
 
-  <!-- PROYEK -->
-  <section id="projects" class="section reveal">
-    <h2>Proyek</h2>
-    <p>Karya yang pernah saya buat.</p>
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">🌐</div>
-        <h3>Website Pertama</h3>
-        <p>Halaman ini, dibuat dengan HTML dan CSS.</p>
+    <!-- ===== PROYEK ===== -->
+    <section id="projects" class="section">
+      <div class="section-head">
+        <h2>Proyek</h2>
+        <p>Karya yang pernah saya buat.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">🎨</div>
-        <h3>Proyek Kedua</h3>
-        <p>Ganti dengan proyekmu berikutnya.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🚀</div>
-        <h3>Proyek Ketiga</h3>
-        <p>Ganti dengan proyekmu berikutnya.</p>
-      </div>
-    </div>
-  </section>
+      <div class="section-body sheets">
 
-  <!-- KONTAK -->
-  <div class="section-full">
-    <section id="contact" class="section reveal">
-      <h2>Kontak</h2>
-      <p>Mau ngobrol atau bekerja sama? Hubungi saya lewat:</p>
-      <div class="contact-buttons">
-        <a class="button" href="mailto:dimassetyo0408@gmail.com">✉️ Kirim Email</a>
-        <a class="button button-green" href="https://wa.me/6285877765713" target="_blank">💬 WhatsApp</a>
+        <article class="sheet sheet-main">
+          <div class="preview" aria-hidden="true">
+            <div class="preview-bar"><i></i><i></i><i></i></div>
+            <div class="preview-body">
+              <div class="sk sk-title"></div>
+              <div class="sk sk-line"></div>
+              <div class="sk sk-line short"></div>
+              <div class="sk sk-btn"></div>
+            </div>
+          </div>
+          <h3>Website pertama</h3>
+          <p>Halaman yang sedang kamu buka ini. Dibuat dengan HTML, CSS, dan JavaScript, lalu ditayangkan lewat GitHub Pages.</p>
+          <ul class="tags">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li>
+          </ul>
+        </article>
+
+        <!-- UBAH: ganti dua kartu ini dengan proyek berikutnya -->
+        <article class="sheet sheet-empty">
+          <h3>Proyek kedua</h3>
+          <p>Segera hadir.</p>
+        </article>
+
+        <article class="sheet sheet-empty">
+          <h3>Proyek ketiga</h3>
+          <p>Segera hadir.</p>
+        </article>
+
       </div>
     </section>
-  </div>
 
-  <footer>
-    <p>© 2026 Website Saya</p>
+    <!-- ===== KONTAK ===== -->
+    <section id="contact" class="section">
+      <div class="section-head">
+        <h2>Kontak</h2>
+        <p>Mau ngobrol atau bekerja sama? Hubungi saya lewat:</p>
+      </div>
+      <div class="section-body">
+        <ul class="contact-list">
+          <li>
+            <a href="mailto:dimassetyo0408@gmail.com">
+              <span class="c-label">Email</span>
+              <span class="c-value">dimassetyo0408@gmail.com</span>
+              <span class="c-act">Kirim email</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/6285877765713" target="_blank" rel="noopener noreferrer">
+              <span class="c-label">WhatsApp</span>
+              <span class="c-value">Chat langsung</span>
+              <span class="c-act">Buka WhatsApp</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="titleblock">
+      <div><small>Gambar</small><b>Website pertama</b></div>
+      <div><small>Digambar oleh</small><b>Dimas</b></div>
+      <div><small>Tahun</small><b id="year">2026</b></div>
+      <div><small>Pengunjung</small><b><i class="live-dot"></i><span id="visitCount">...</span></b></div>
+    </div>
+    <p class="foot-note">Dibuat dengan HTML, CSS, dan GitHub Pages.</p>
   </footer>
 
-    <div class="visitor">
-    <span class="live-dot"></span>
-    <span>Pengunjung: <b id="visitCount">...</b></span>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
-  
+
   <script>
-    // Efek mengetik (MARI LIHAT!!)
-    const words = ["pembelajar web", "pembuat konten", "penggemar teknologi"];
-    const typedEl = document.getElementById("typed");
-    let w = 0, c = 0, del = false;
+    (function () {
+      var root = document.documentElement;
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function type() {
-      const word = words[w];
-      typedEl.textContent = word.slice(0, c);
-      if (!del && c === word.length) {
-        del = true;
-        setTimeout(type, 1200);
-        return;
+      // ===== Mode gelap / terang =====
+      var themeBtn = document.getElementById("themeBtn");
+      function syncIcon() {
+        themeBtn.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
       }
-      if (del && c === 0) {
-        del = false;
-        w = (w + 1) % words.length;
-      }
-      c += del ? -1 : 1;
-      setTimeout(type, del ? 50 : 100);
-    }
-    type();
-
-    // Animasi muncul saat di-scroll + hitung angka
-    function countUp(el) {
-      const target = +el.dataset.target;
-      let n = 0;
-      const step = Math.max(1, Math.ceil(target / 40));
-      const timer = setInterval(() => {
-        n += step;
-        if (n >= target) { n = target; clearInterval(timer); }
-        el.textContent = n;
-      }, 40);
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-          entry.target.querySelectorAll(".count").forEach(countUp);
-          observer.unobserve(entry.target);
-        }
+      syncIcon();
+      themeBtn.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        syncIcon();
+        try { localStorage.setItem("theme", next); } catch (e) {}
       });
-    }, { threshold: 0.2 });
 
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-
-    // Mode gelap / terang
-    const root = document.documentElement;
-    const btn = document.getElementById("themeBtn");
-
-    try {
-      if (localStorage.getItem("theme") === "dark") {
-        root.setAttribute("data-theme", "dark");
-        btn.textContent = "☀️";
+      // ===== Menu di ponsel =====
+      var menu = document.getElementById("menu");
+      var toggle = document.getElementById("navToggle");
+      function closeMenu() {
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
       }
-    } catch (e) {}
+      toggle.addEventListener("click", function () {
+        var open = menu.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      menu.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", closeMenu);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeMenu();
+      });
 
-    btn.addEventListener("click", () => {
-      const dark = root.getAttribute("data-theme") === "dark";
-      if (dark) {
-        root.removeAttribute("data-theme");
-        btn.textContent = "🌙";
-      } else {
-        root.setAttribute("data-theme", "dark");
-        btn.textContent = "☀️";
-      }
-      try { localStorage.setItem("theme", dark ? "light" : "dark"); } catch (e) {}
-    });
+      // ===== Efek mengetik =====
+      var words = ["pembelajar web", "pembuat konten", "penggemar teknologi"];
+      var typedEl = document.getElementById("typed");
+      var w = 0, c = 0, del = false;
 
-    // Dynamic Island
-const island = document.getElementById("island");
-const islandText = document.getElementById("islandText");
-const msgs = ["🎵 Lagi ngoding...", "📩 1 pesan baru", "🚀 Website live!"];
-let m = 0;
-
-function showIsland() {
-  islandText.textContent = msgs[m];
-  m = (m + 1) % msgs.length;
-  island.classList.add("open");
-  setTimeout(() => island.classList.remove("open"), 2500);
-}
-
-island.addEventListener("click", showIsland);
-setTimeout(showIsland, 1500);
-setInterval(showIsland, 6000);
-    // Penghitung pengunjung
-    (async function () {
-      const el = document.getElementById("visitCount");
-      try {
-        const counter = new Counter({ workspace: "dimasstory-web" });
-        let seen = false;
-        try { seen = localStorage.getItem("visited") === "1"; } catch (e) {}
-
-        let res;
-        if (seen) {
-          try { res = await counter.get("pengunjung"); }
-          catch (e) { res = await counter.up("pengunjung"); }
-        } else {
-          res = await counter.up("pengunjung");
-          try { localStorage.setItem("visited", "1"); } catch (e) {}
+      function type() {
+        var word = words[w];
+        typedEl.textContent = word.slice(0, c);
+        if (!del && c === word.length) {
+          del = true;
+          setTimeout(type, 1400);
+          return;
         }
-
-        const n = res.value ?? res.Count ?? res.count;
-        el.textContent = n;
-      } catch (e) {
-        el.textContent = "-";
+        if (del && c === 0) {
+          del = false;
+          w = (w + 1) % words.length;
+        }
+        c += del ? -1 : 1;
+        setTimeout(type, del ? 45 : 90);
       }
+      if (reduce) { typedEl.textContent = words[0]; } else { type(); }
+
+      // ===== Bilah keahlian muncul saat terlihat =====
+      var skillList = document.getElementById("skillList");
+      if ("IntersectionObserver" in window) {
+        var skillObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              skillList.classList.add("show");
+              skillObs.disconnect();
+            }
+          });
+        }, { threshold: 0.3 });
+        skillObs.observe(skillList);
+      } else {
+        skillList.classList.add("show");
+      }
+
+      // ===== Menu aktif mengikuti posisi scroll =====
+      var links = {};
+      menu.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        links[a.getAttribute("href").slice(1)] = a;
+      });
+      if ("IntersectionObserver" in window) {
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              Object.keys(links).forEach(function (k) {
+                links[k].classList.toggle("active", k === e.target.id);
+              });
+            }
+          });
+        }, { rootMargin: "-45% 0px -50% 0px" });
+        Object.keys(links).forEach(function (id) {
+          var s = document.getElementById(id);
+          if (s) spy.observe(s);
+        });
+      }
+
+      // ===== Dynamic Island =====
+      var island = document.getElementById("island");
+      var islandText = document.getElementById("islandText");
+      var msgs = ["🎵 Lagi ngoding...", "☕ Lagi belajar CSS", "🚀 Website live!"];
+      var m = 0, islandTimer;
+
+      function showIsland() {
+        clearTimeout(islandTimer);
+        islandText.textContent = msgs[m];
+        m = (m + 1) % msgs.length;
+        island.classList.add("open");
+        islandTimer = setTimeout(function () { island.classList.remove("open"); }, 2500);
+      }
+      island.addEventListener("click", showIsland);
+      island.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showIsland(); }
+      });
+      if (!reduce) setTimeout(showIsland, 1600);
+
+      // ===== Tahun otomatis =====
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ===== Penghitung pengunjung =====
+      (async function () {
+        var el = document.getElementById("visitCount");
+        try {
+          var counter = new Counter({ workspace: "dimasstory-web" });
+          var seen = false;
+          try { seen = localStorage.getItem("visited") === "1"; } catch (e) {}
+
+          var res;
+          if (seen) {
+            try { res = await counter.get("pengunjung"); }
+            catch (e) { res = await counter.up("pengunjung"); }
+          } else {
+            res = await counter.up("pengunjung");
+            try { localStorage.setItem("visited", "1"); } catch (e) {}
+          }
+
+          var n = res.value ?? res.Count ?? res.count;
+          el.textContent = n;
+        } catch (e) {
+          el.textContent = "-";
+        }
+      })();
     })();
-    
   </script>
 
 </body>
