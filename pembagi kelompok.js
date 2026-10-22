@@ -2,6 +2,7 @@ const root = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
 const namesEl = document.getElementById('names');
 const countEl = document.getElementById('count');
+const exampleBtn = document.getElementById('exampleBtn');
 const modeEl = document.getElementById('mode');
 const amountEl = document.getElementById('amount');
 const amountLabelEl = document.getElementById('amountLabel');
@@ -18,6 +19,7 @@ const toastEl = document.getElementById('toast');
 const STORAGE_KEY = 'pembagi-kelompok-v1';
 const THEME_KEY = 'theme';
 const PALETTE = ['#ffd84a', '#ff7ab8', '#5ee0ff', '#5ef0a5', '#ffa24a', '#b99cff'];
+const EXAMPLE_NAMES = ['Andi', 'Budi', 'Citra', 'Dewi', 'Eka', 'Fajar', 'Gita', 'Hana', 'Indra', 'Joko'];
 let lastResult = [];
 
 /* ===== Tema terang / gelap ===== */
@@ -224,6 +226,13 @@ async function copyResult() {
   }
 }
 
+function fillExample() {
+  namesEl.value = EXAMPLE_NAMES.join('\n');
+  updateCount();
+  saveState();
+  showError('');
+}
+
 function resetAll() {
   namesEl.value = '';
   amountEl.value = 3;
@@ -243,6 +252,7 @@ namesEl.addEventListener('input', function () { updateCount(); saveState(); });
 modeEl.addEventListener('change', function () { updateModeLabel(); saveState(); });
 amountEl.addEventListener('input', saveState);
 leaderEl.addEventListener('change', saveState);
+exampleBtn.addEventListener('click', fillExample);
 shuffleBtn.addEventListener('click', doShuffle);
 copyBtn.addEventListener('click', copyResult);
 resetBtn.addEventListener('click', resetAll);
