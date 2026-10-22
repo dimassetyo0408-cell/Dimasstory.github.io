@@ -9,8 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="pembagi-kelompok.css">
 
   <script>
@@ -23,56 +22,53 @@
   </script>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="navbar">
-      <a class="logo" href="index.html"><span class="logo-mark"></span>Dimas</a>
-      <div class="tool-menu">
-        <a href="index.html#projects">Semua proyek</a>
-        <button class="theme-btn" id="themeBtn" type="button" aria-label="Ganti tema">☀️</button>
-      </div>
-    </nav>
+  <header class="topbar">
+    <a class="back" href="index.html#projects">← Kembali ke portofolio</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Ganti tema">☀️</button>
   </header>
 
-  <main>
-    <section class="tool">
-      <div class="tool-head enter">
-        <h1>Pembagi Kelompok</h1>
-        <p>Proyek ketiga saya: tempel daftar nama, atur jumlahnya, lalu biarkan acak yang menentukan siapa sekelompok dengan siapa.</p>
-        <div class="stripe" aria-hidden="true"></div>
+  <main class="wrap">
+    <section class="hero enter">
+      <p class="eyebrow">Proyek ketiga</p>
+      <h1>Pembagi Kelompok</h1>
+      <p class="lead">Tempel daftar nama teman sekelas, atur jumlahnya, lalu biarkan acak yang menentukan siapa sekelompok dengan siapa. Adil, cepat, tanpa debat.</p>
+      <div class="stripe" aria-hidden="true"></div>
+    </section>
+
+    <section class="panel-grid">
+      <div class="card enter" style="--i: 1">
+        <h2 class="card-title">Daftar nama</h2>
+        <label class="field-label" for="names">Satu nama per baris, atau pisahkan dengan koma</label>
+        <textarea class="control" id="names" placeholder="Andi&#10;Budi&#10;Citra&#10;Dewi"></textarea>
+        <div class="names-foot">
+          <p class="note">Terbaca: <b id="count">0</b> nama. Nama kembar diabaikan.</p>
+          <button class="link-btn" id="exampleBtn" type="button">Isi contoh nama</button>
+        </div>
       </div>
 
-      <div class="layout">
-        <div class="sheet enter" style="--i: 1">
-          <h2 class="sheet-title">Daftar nama</h2>
-          <label class="field-label" for="names">Satu nama per baris, atau pisahkan dengan koma</label>
-          <textarea class="control" id="names" placeholder="Andi&#10;Budi&#10;Citra&#10;Dewi"></textarea>
-          <p class="note">Terbaca: <b id="count">0</b> nama. Nama kembar otomatis diabaikan.</p>
+      <div class="card enter" style="--i: 2">
+        <h2 class="card-title">Pengaturan</h2>
+
+        <label class="field-label" for="mode">Bagi berdasarkan</label>
+        <select class="control" id="mode">
+          <option value="groups">Jumlah kelompok</option>
+          <option value="size">Anggota per kelompok</option>
+        </select>
+
+        <label class="field-label" for="amount" id="amountLabel">Jumlah kelompok</label>
+        <input class="control" type="number" id="amount" min="1" value="3">
+
+        <label class="check">
+          <input type="checkbox" id="leader">
+          Tunjuk ketua acak di tiap kelompok
+        </label>
+
+        <div class="actions">
+          <button class="btn btn-yellow" id="shuffleBtn" type="button">🎲 Acak kelompok</button>
+          <button class="btn btn-cyan" id="copyBtn" type="button" disabled>📋 Salin hasil</button>
+          <button class="btn btn-ghost" id="resetBtn" type="button">Reset</button>
         </div>
-
-        <div class="sheet enter" style="--i: 2">
-          <h2 class="sheet-title">Pengaturan</h2>
-
-          <label class="field-label" for="mode">Bagi berdasarkan</label>
-          <select class="control" id="mode">
-            <option value="groups">Jumlah kelompok</option>
-            <option value="size">Anggota per kelompok</option>
-          </select>
-
-          <label class="field-label" for="amount" id="amountLabel">Jumlah kelompok</label>
-          <input class="control" type="number" id="amount" min="1" value="3">
-
-          <label class="check">
-            <input type="checkbox" id="leader">
-            Tunjuk ketua acak di tiap kelompok
-          </label>
-
-          <div class="actions">
-            <button class="btn btn-primary" id="shuffleBtn" type="button">🎲 Acak kelompok</button>
-            <button class="btn btn-cyan" id="copyBtn" type="button" disabled>📋 Salin hasil</button>
-            <button class="btn btn-ghost" id="resetBtn" type="button">Reset</button>
-          </div>
-          <p class="error" id="error" role="alert"></p>
-        </div>
+        <p class="error" id="error" role="alert"></p>
       </div>
     </section>
 
@@ -85,8 +81,8 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p class="foot-note">Proyek ketiga. Dibuat dengan HTML, CSS, dan JavaScript.</p>
+  <footer class="foot">
+    <p>Proyek ketiga. Dibuat dengan HTML, CSS, dan JavaScript.</p>
   </footer>
 
   <div class="toast" id="toast" role="status"></div>
