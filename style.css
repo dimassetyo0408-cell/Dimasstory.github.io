@@ -1162,3 +1162,120 @@ a.sheet-link:hover {
   color: var(--ink);
   border-bottom: 3px solid var(--marker);
 }
+
+/* ===== Percantik: palet warna ===== */
+:root {
+  --palet: linear-gradient(
+    90deg,
+    #ffd84a 0 16.66%,
+    #ff7ab8 0 33.33%,
+    #5ee0ff 0 50%,
+    #5ef0a5 0 66.66%,
+    #ffa24a 0 83.33%,
+    #b99cff 0
+  );
+}
+
+/* Garis palet di atas judul bagian */
+.section-head h2::before {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 8px;
+  margin-bottom: 14px;
+  background: var(--palet);
+}
+
+/* Kartu proyek berwarna */
+.sheets > .sheet {
+  --c: #ffd84a;
+  box-shadow: 6px 6px 0 var(--c);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.sheets > .sheet:nth-child(2) { --c: #5ee0ff; }
+.sheets > .sheet:nth-child(3) { --c: #ff7ab8; }
+
+.sheets > .sheet:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--c);
+}
+
+.sheets .sheet-go {
+  border-bottom-color: var(--c);
+}
+
+.sheet-go::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.2s;
+}
+
+a.sheet-link:hover .sheet-go::after {
+  transform: translateX(6px);
+}
+
+/* Ponsel melayang pelan + cincin di avatar */
+.iphone {
+  animation: melayang 6s ease-in-out infinite;
+}
+
+@keyframes melayang {
+  50% { transform: translateY(-10px); }
+}
+
+.app-avatar {
+  box-shadow:
+    0 0 0 4px rgba(255, 216, 74, 0.28),
+    0 0 0 9px rgba(255, 216, 74, 0.12);
+}
+
+/* Bagian muncul pelan saat di-scroll (browser baru saja) */
+@supports (animation-timeline: view()) {
+  .section {
+    animation: muncul linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  @keyframes muncul {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+.mini-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  max-width: 150px;
+  margin-bottom: 16px;
+}
+
+.mini-keys i {
+  height: 14px;
+  background: var(--line-faint);
+  border: 1px solid var(--line);
+}
+
+.mini-keys i:nth-child(4n) {
+  background: var(--c);
+}
+
+.mini-chips {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.mini-chips i {
+  flex: 1;
+  height: 26px;
+  border: 2px solid var(--line);
+}
+
+.mini-chips i:nth-child(1) { background: #ffd84a; }
+.mini-chips i:nth-child(2) { background: #ff7ab8; }
+.mini-chips i:nth-child(3) { background: #5ee0ff; }
+.mini-chips i:nth-child(4) { background: #5ef0a5; }
