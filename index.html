@@ -157,23 +157,63 @@
         <h2>Keahlian</h2>
         <p>Hal-hal yang sedang saya pelajari.</p>
       </div>
-      <div class="section-body">
-        <!-- UBAH: nama dan persentase. Salin satu blok .skill untuk menambah keahlian -->
-        <div class="skills" id="skillList">
-          <div class="skill">
-            <div class="skill-top"><span>HTML</span><span>80%</span></div>
-            <div class="ruler" role="img" aria-label="HTML 80 persen" style="--w:80%"><span></span></div>
-          </div>
-          <div class="skill">
-            <div class="skill-top"><span>CSS</span><span>65%</span></div>
-            <div class="ruler" role="img" aria-label="CSS 65 persen" style="--w:65%"><span></span></div>
-          </div>
-          <div class="skill">
-            <div class="skill-top"><span>GitHub</span><span>50%</span></div>
-            <div class="ruler" role="img" aria-label="GitHub 50 persen" style="--w:50%"><span></span></div>
-          </div>
+      <section id="skills" class="section">
+  <div class="section-head">
+    <h2>Keahlian</h2>
+    <p>Hal-hal yang sedang saya pelajari.</p>
+  </div>
+  <div class="section-body">
+    <!-- UBAH: nama, level, dan "dipakai di". Salin satu blok .skill-card untuk menambah keahlian.
+         Titik terisi = class="on". Level 4 dari 5 berarti 4 titik pertama diberi class "on". -->
+    <div class="skill-cards" id="skillList">
+
+      <article class="skill-card">
+        <div class="skill-card-top">
+          <h3>HTML</h3>
+          <span class="level-badge">Menengah</span>
         </div>
-      </div>
+        <div class="level-dots" role="img" aria-label="Level 4 dari 5">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i>
+        </div>
+        <p>Dipakai di: Website ini, Kalkulator, Pembagi Kelompok</p>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-card-top">
+          <h3>CSS</h3>
+          <span class="level-badge">Menengah</span>
+        </div>
+        <div class="level-dots" role="img" aria-label="Level 3 dari 5">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i>
+        </div>
+        <p>Dipakai di: tema gelap/terang, animasi, dan tata letak semua proyek</p>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-card-top">
+          <h3>JavaScript</h3>
+          <span class="level-badge">Dasar</span>
+        </div>
+        <div class="level-dots" role="img" aria-label="Level 2 dari 5">
+          <i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+        </div>
+        <p>Dipakai di: Kalkulator, Pembagi Kelompok, efek mengetik</p>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-card-top">
+          <h3>GitHub</h3>
+          <span class="level-badge">Dasar</span>
+        </div>
+        <div class="level-dots" role="img" aria-label="Level 2 dari 5">
+          <i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+        </div>
+        <p>Dipakai di: menayangkan semua proyek lewat GitHub Pages</p>
+      </article>
+
+    </div>
+  </div>
+</section>
     </section>
 
     <!-- ===== PROYEK ===== -->
