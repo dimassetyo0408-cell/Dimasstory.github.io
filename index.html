@@ -433,7 +433,6 @@
   var box = document.getElementById("visitBox");
   var el = document.getElementById("visitCount");
 
-  // Batalkan kalau terlalu lama (jaringan lambat atau layanan down)
   function withTimeout(promise, ms) {
     return Promise.race([
       promise,
@@ -455,22 +454,24 @@
     } else {
       res = await counter.up("pengunjung");
       try { localStorage.setItem("visited", "1"); } catch (e) {}
+    }
+
     var raw = res && (res.value ?? res.Count ?? res.count ??
-  (res.data && (res.data.up_count ?? res.data.count ?? res.data.value)));
-var n = Number(raw);
-if (!isFinite(n)) {
-  console.warn("Bentuk respons penghitung:", res);
-  throw new Error("angka tidak valid");
-}
+      (res.data && (res.data.up_count ?? res.data.count ?? res.data.value)));
+    var n = Number(raw);
+    if (!isFinite(n)) {
+      console.warn("Bentuk respons penghitung:", res);
+      throw new Error("angka tidak valid");
+    }
+    return n;
+  }
 
   try {
     var n = await withTimeout(hitung(), 6000);
     el.textContent = n.toLocaleString("id-ID");
-    box.hidden = false; // tampilkan hanya kalau berhasil
-    } catch (e) {
-  console.warn("Penghitung gagal:", e);
-}
-    // Gagal: kotak tetap tersembunyi, tidak ada tulisan error di halaman
+    box.hidden = false;
+  } catch (e) {
+    console.warn("Penghitung gagal:", e);
   }
 })();
     })();
