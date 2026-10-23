@@ -1438,6 +1438,15 @@ html:not(.js) .level-dots i.on {
   text-decoration: none;
 }
 
+.titleblock {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.titleblock > div {
+  flex: 1 1 auto;
+}
+
 #visitBox[hidden] {
   display: none !important;
 }
