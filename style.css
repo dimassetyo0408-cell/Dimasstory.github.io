@@ -1437,3 +1437,7 @@ html:not(.js) .level-dots i.on {
   box-shadow: none;
   text-decoration: none;
 }
+
+#visitBox[hidden] {
+  display: none !important;
+}
