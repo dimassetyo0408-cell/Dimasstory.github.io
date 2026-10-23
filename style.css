@@ -1301,3 +1301,47 @@ a.sheet-link:hover .sheet-go::after {
     transition: none;
   }
 }
+
+/* Efek hover kartu proyek */
+#projects a,
+#projects article {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#projects a:hover,
+#projects a:focus-visible,
+#projects article:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(14, 42, 110, 0.25);
+}
+
+/* Ilustrasi atau gambar di dalam kartu membesar sedikit */
+#projects a :is(img, svg),
+#projects article :is(img, svg) {
+  transition: transform 0.35s ease;
+}
+
+#projects a:hover :is(img, svg),
+#projects a:focus-visible :is(img, svg),
+#projects article:hover :is(img, svg) {
+  transform: scale(1.06);
+}
+
+/* Efek sentuh di HP: kartu agak menekan saat diketuk */
+#projects a:active,
+#projects article:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects a,
+  #projects article,
+  #projects a :is(img, svg),
+  #projects article :is(img, svg) {
+    transition: none;
+  }
+  #projects a:hover,
+  #projects article:hover {
+    transform: none;
+  }
+}
