@@ -1427,3 +1427,13 @@ html:not(.js) .level-dots i.on {
     transition: none;
   }
 }
+
+/* Tombol "Lihat kode" di kartu Website pertama */
+#projects article a.sheet-go,
+#projects article a.sheet-go:hover,
+#projects article a.sheet-go:focus-visible,
+#projects article a.sheet-go:active {
+  transform: none;
+  box-shadow: none;
+  text-decoration: none;
+}
