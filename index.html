@@ -470,10 +470,13 @@
     var n = await withTimeout(hitung(), 6000);
     el.textContent = n.toLocaleString("id-ID");
     box.hidden = false;
-  } catch (e) {
+    } catch (e) {
     console.warn("Penghitung gagal:", e);
+    // SEMENTARA: tampilkan penyebab di halaman untuk diagnosis
+    box.hidden = false;
+    el.textContent = "ERR " + (e && (e.status || e.code) || "") + " " +
+      (e && e.message || String(e));
   }
-})();
     })();
   </script>
 
