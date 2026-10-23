@@ -455,18 +455,21 @@
     } else {
       res = await counter.up("pengunjung");
       try { localStorage.setItem("visited", "1"); } catch (e) {}
-    }
-
-    var n = Number(res.value ?? res.Count ?? res.count);
-    if (!isFinite(n)) throw new Error("angka tidak valid");
-    return n;
-  }
+    var raw = res && (res.value ?? res.Count ?? res.count ??
+  (res.data && (res.data.up_count ?? res.data.count ?? res.data.value)));
+var n = Number(raw);
+if (!isFinite(n)) {
+  console.warn("Bentuk respons penghitung:", res);
+  throw new Error("angka tidak valid");
+}
 
   try {
     var n = await withTimeout(hitung(), 6000);
     el.textContent = n.toLocaleString("id-ID");
     box.hidden = false; // tampilkan hanya kalau berhasil
-  } catch (e) {
+    } catch (e) {
+  console.warn("Penghitung gagal:", e);
+}
     // Gagal: kotak tetap tersembunyi, tidak ada tulisan error di halaman
   }
 })();
