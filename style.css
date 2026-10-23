@@ -1303,8 +1303,8 @@ a.sheet-link:hover .sheet-go::after {
 }
 
 /* Efek hover kartu proyek */
-#projects a,
-#projects article {
+#projects a:not(.reveal),
+#projects article:not(.reveal) {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
