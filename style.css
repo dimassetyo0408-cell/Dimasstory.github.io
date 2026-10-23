@@ -1279,3 +1279,25 @@ a.sheet-link:hover .sheet-go::after {
 .mini-chips i:nth-child(2) { background: #ff7ab8; }
 .mini-chips i:nth-child(3) { background: #5ee0ff; }
 .mini-chips i:nth-child(4) { background: #5ef0a5; }
+
+/* Animasi muncul saat scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hormati pengguna yang mematikan animasi di perangkatnya */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
