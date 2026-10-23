@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
 
   <!-- Atur tema sebelum halaman tampil supaya tidak berkedip -->
   <script>
@@ -416,6 +416,44 @@
       })();
     })();
   </script>
+
+  <script>
+  (function () {
+    // Elemen yang mau dianimasikan. Tambah atau ubah selector sesuai kebutuhan.
+    var selectors = [
+      '#about > *',
+      '#skills > *',
+      '#projects > *',
+      '#contact > *',
+      '#projects a',
+      '#projects article'
+    ];
+
+    var items = document.querySelectorAll(selectors.join(','));
+    if (!('IntersectionObserver' in window)) return; // browser lama: biarkan tampil biasa
+
+    // Jeda bertingkat supaya kartu muncul satu per satu
+    var counters = new Map();
+    items.forEach(function (el) {
+      var parent = el.parentElement;
+      var n = counters.get(parent) || 0;
+      el.style.setProperty('--reveal-delay', Math.min(n * 100, 400) + 'ms');
+      counters.set(parent, n + 1);
+      el.classList.add('reveal');
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target); // animasi cukup sekali
+        }
+      });
+    }, { threshold: 0.15 });
+
+    items.forEach(function (el) { observer.observe(el); });
+  })();
+</script>
 
 </body>
 </html>
