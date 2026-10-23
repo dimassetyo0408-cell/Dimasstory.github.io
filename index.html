@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
 
   <!-- Atur tema sebelum halaman tampil supaya tidak berkedip -->
   <script>
@@ -311,66 +311,67 @@
 
   <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
 
-  <script>
-    (function () {
-      var root = document.documentElement;
-      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+ <script>
+  (function () {
+    var root = document.documentElement;
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // ===== Mode gelap / terang =====
-      var themeBtn = document.getElementById("themeBtn");
-      function syncIcon() {
-        themeBtn.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
-      }
+    // ===== Mode gelap / terang =====
+    var themeBtn = document.getElementById("themeBtn");
+    function syncIcon() {
+      themeBtn.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+    }
+    syncIcon();
+    themeBtn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
       syncIcon();
-      themeBtn.addEventListener("click", function () {
-        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        syncIcon();
-        try { localStorage.setItem("theme", next); } catch (e) {}
-      });
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
 
-      // ===== Menu di ponsel =====
-      var menu = document.getElementById("menu");
-      var toggle = document.getElementById("navToggle");
-      function closeMenu() {
-        menu.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
+    // ===== Menu di ponsel =====
+    var menu = document.getElementById("menu");
+    var toggle = document.getElementById("navToggle");
+    function closeMenu() {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+    toggle.addEventListener("click", function () {
+      var open = menu.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    menu.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", closeMenu);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    // ===== Efek mengetik =====
+    var words = ["pembelajar web", "pembuat konten", "penggemar teknologi"];
+    var typedEl = document.getElementById("typed");
+    var w = 0, c = 0, del = false;
+
+    function type() {
+      var word = words[w];
+      typedEl.textContent = word.slice(0, c);
+      if (!del && c === word.length) {
+        del = true;
+        setTimeout(type, 1400);
+        return;
       }
-      toggle.addEventListener("click", function () {
-        var open = menu.classList.toggle("open");
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      });
-      menu.querySelectorAll("a").forEach(function (a) {
-        a.addEventListener("click", closeMenu);
-      });
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeMenu();
-      });
-
-      // ===== Efek mengetik =====
-      var words = ["pembelajar web", "pembuat konten", "penggemar teknologi"];
-      var typedEl = document.getElementById("typed");
-      var w = 0, c = 0, del = false;
-
-      function type() {
-        var word = words[w];
-        typedEl.textContent = word.slice(0, c);
-        if (!del && c === word.length) {
-          del = true;
-          setTimeout(type, 1400);
-          return;
-        }
-        if (del && c === 0) {
-          del = false;
-          w = (w + 1) % words.length;
-        }
-        c += del ? -1 : 1;
-        setTimeout(type, del ? 45 : 90);
+      if (del && c === 0) {
+        del = false;
+        w = (w + 1) % words.length;
       }
-      if (reduce) { typedEl.textContent = words[0]; } else { type(); }
+      c += del ? -1 : 1;
+      setTimeout(type, del ? 45 : 90);
+    }
+    if (reduce) { typedEl.textContent = words[0]; } else { type(); }
 
-      // ===== Bilah keahlian muncul saat terlihat =====
-      var skillList = document.getElementById("skillList");
+    // ===== Titik keahlian menyala saat terlihat =====
+    var skillList = document.getElementById("skillList");
+    if (skillList) {
       if ("IntersectionObserver" in window) {
         var skillObs = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
@@ -384,101 +385,93 @@
       } else {
         skillList.classList.add("show");
       }
+    }
 
-      // ===== Menu aktif mengikuti posisi scroll =====
-      var links = {};
-      menu.querySelectorAll('a[href^="#"]').forEach(function (a) {
-        links[a.getAttribute("href").slice(1)] = a;
-      });
-      if ("IntersectionObserver" in window) {
-        var spy = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              Object.keys(links).forEach(function (k) {
-                links[k].classList.toggle("active", k === e.target.id);
-              });
-            }
-          });
-        }, { rootMargin: "-45% 0px -50% 0px" });
-        Object.keys(links).forEach(function (id) {
-          var s = document.getElementById(id);
-          if (s) spy.observe(s);
+    // ===== Menu aktif mengikuti posisi scroll =====
+    var links = {};
+    menu.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      links[a.getAttribute("href").slice(1)] = a;
+    });
+    if ("IntersectionObserver" in window) {
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            Object.keys(links).forEach(function (k) {
+              links[k].classList.toggle("active", k === e.target.id);
+            });
+          }
         });
-      }
-
-      // ===== Dynamic Island =====
-      var island = document.getElementById("island");
-      var islandText = document.getElementById("islandText");
-      var msgs = ["🎵 Lagi ngoding...", "☕ Lagi belajar CSS", "🚀 Website live!"];
-      var m = 0, islandTimer;
-
-      function showIsland() {
-        clearTimeout(islandTimer);
-        islandText.textContent = msgs[m];
-        m = (m + 1) % msgs.length;
-        island.classList.add("open");
-        islandTimer = setTimeout(function () { island.classList.remove("open"); }, 2500);
-      }
-      island.addEventListener("click", showIsland);
-      island.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showIsland(); }
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      Object.keys(links).forEach(function (id) {
+        var s = document.getElementById(id);
+        if (s) spy.observe(s);
       });
-      if (!reduce) setTimeout(showIsland, 1600);
-
-      // ===== Tahun otomatis =====
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-     // ===== Penghitung pengunjung =====
-(async function () {
-  var box = document.getElementById("visitBox");
-  var el = document.getElementById("visitCount");
-
-  function withTimeout(promise, ms) {
-    return Promise.race([
-      promise,
-      new Promise(function (_, reject) {
-        setTimeout(function () { reject(new Error("timeout")); }, ms);
-      })
-    ]);
-  }
-
-  async function hitung() {
-    var counter = new Counter({ workspace: "dimasstory-web" });
-    var seen = false;
-    try { seen = localStorage.getItem("visited") === "1"; } catch (e) {}
-
-    var res;
-    if (seen) {
-      try { res = await counter.get("pengunjung"); }
-      catch (e) { res = await counter.up("pengunjung"); }
-    } else {
-      res = await counter.up("pengunjung");
-      try { localStorage.setItem("visited", "1"); } catch (e) {}
     }
 
-    var raw = res && (res.value ?? res.Count ?? res.count ??
-      (res.data && (res.data.up_count ?? res.data.count ?? res.data.value)));
-    var n = Number(raw);
-    if (!isFinite(n)) {
-      console.warn("Bentuk respons penghitung:", res);
-      throw new Error("angka tidak valid");
-    }
-    return n;
-  }
+    // ===== Dynamic Island =====
+    var island = document.getElementById("island");
+    var islandText = document.getElementById("islandText");
+    var msgs = ["🎵 Lagi ngoding...", "☕ Lagi belajar CSS", "🚀 Website live!"];
+    var m = 0, islandTimer;
 
-  try {
-    var n = await withTimeout(hitung(), 6000);
-    el.textContent = n.toLocaleString("id-ID");
-    box.hidden = false;
-    } catch (e) {
-    console.warn("Penghitung gagal:", e);
-    // SEMENTARA: tampilkan penyebab di halaman untuk diagnosis
-    box.hidden = false;
-    el.textContent = "ERR " + (e && (e.status || e.code) || "") + " " +
-      (e && e.message || String(e));
-  }
+    function showIsland() {
+      clearTimeout(islandTimer);
+      islandText.textContent = msgs[m];
+      m = (m + 1) % msgs.length;
+      island.classList.add("open");
+      islandTimer = setTimeout(function () { island.classList.remove("open"); }, 2500);
+    }
+    island.addEventListener("click", showIsland);
+    island.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showIsland(); }
+    });
+    if (!reduce) setTimeout(showIsland, 1600);
+
+    // ===== Tahun otomatis =====
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ===== Penghitung pengunjung =====
+    // Dipisah dan dibungkus try/catch supaya kalau gagal, fitur lain tetap jalan
+    (async function () {
+      try {
+        var box = document.getElementById("visitBox");
+        var el = document.getElementById("visitCount");
+        if (!box || !el) return;
+
+        var counter = new Counter({ workspace: "dimasstory-web" });
+        var seen = false;
+        try { seen = localStorage.getItem("visited") === "1"; } catch (e) {}
+
+        var res;
+        if (seen) {
+          try { res = await counter.get("pengunjung"); }
+          catch (e) { res = await counter.up("pengunjung"); }
+        } else {
+          res = await counter.up("pengunjung");
+          try { localStorage.setItem("visited", "1"); } catch (e) {}
+        }
+
+        var raw = res && (res.value ?? res.Count ?? res.count ??
+          (res.data && (res.data.up_count ?? res.data.count ?? res.data.value)));
+        var n = Number(raw);
+        if (!isFinite(n)) {
+          console.warn("Bentuk respons penghitung:", res);
+          throw new Error("angka tidak valid");
+        }
+        el.textContent = n.toLocaleString("id-ID");
+        box.hidden = false;
+      } catch (e) {
+        console.warn("Penghitung gagal:", e);
+        // SEMENTARA untuk diagnosis: tampilkan penyebab di footer. Hapus 4 baris ini kalau sudah beres.
+        var b2 = document.getElementById("visitBox"), e2 = document.getElementById("visitCount");
+        if (b2 && e2) {
+          b2.hidden = false;
+          e2.textContent = "ERR " + ((e && (e.status || e.code)) || "") + " " + ((e && e.message) || String(e));
+        }
+      }
     })();
-  </script>
+  })();
+</script>
 
   <script>
   (function () {
