@@ -1345,3 +1345,85 @@ a.sheet-link:hover .sheet-go::after {
     transform: none;
   }
 }
+
+/* Kartu keahlian */
+.skill-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.skill-card {
+  padding: 20px;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent, #3d78f0);
+}
+
+.skill-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.skill-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.level-badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent, #3d78f0);
+  background: color-mix(in srgb, var(--accent, #3d78f0) 14%, transparent);
+}
+
+.level-dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.level-dots i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  transition: background 0.4s ease, transform 0.4s ease;
+}
+
+.level-dots i:nth-child(2) { transition-delay: 0.1s; }
+.level-dots i:nth-child(3) { transition-delay: 0.2s; }
+.level-dots i:nth-child(4) { transition-delay: 0.3s; }
+.level-dots i:nth-child(5) { transition-delay: 0.4s; }
+
+/* Titik menyala saat bagian ini terlihat (atau langsung, kalau JS mati) */
+.skill-cards.show .level-dots i.on,
+html:not(.js) .level-dots i.on {
+  background: var(--accent, #3d78f0);
+  transform: scale(1.15);
+}
+
+.skill-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card,
+  .level-dots i {
+    transition: none;
+  }
+}
