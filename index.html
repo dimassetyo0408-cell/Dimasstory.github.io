@@ -304,7 +304,7 @@
       <div><small>Gambar</small><b>Website pertama</b></div>
       <div><small>Digambar oleh</small><b>Dimas</b></div>
       <div><small>Tahun</small><b id="year">2026</b></div>
-      <div><small>Pengunjung</small><b><i class="live-dot"></i><span id="visitCount">...</span></b></div>
+     <div id="visitBox" hidden><small>Pengunjung</small><b><i class="live-dot"></i><span id="visitCount">0</span></b></div>
     </div>
     <p class="foot-note">Dibuat dengan HTML, CSS, dan GitHub Pages.</p>
   </footer>
@@ -428,29 +428,48 @@
       // ===== Tahun otomatis =====
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // ===== Penghitung pengunjung =====
-      (async function () {
-        var el = document.getElementById("visitCount");
-        try {
-          var counter = new Counter({ workspace: "dimasstory-web" });
-          var seen = false;
-          try { seen = localStorage.getItem("visited") === "1"; } catch (e) {}
+     // ===== Penghitung pengunjung =====
+(async function () {
+  var box = document.getElementById("visitBox");
+  var el = document.getElementById("visitCount");
 
-          var res;
-          if (seen) {
-            try { res = await counter.get("pengunjung"); }
-            catch (e) { res = await counter.up("pengunjung"); }
-          } else {
-            res = await counter.up("pengunjung");
-            try { localStorage.setItem("visited", "1"); } catch (e) {}
-          }
+  // Batalkan kalau terlalu lama (jaringan lambat atau layanan down)
+  function withTimeout(promise, ms) {
+    return Promise.race([
+      promise,
+      new Promise(function (_, reject) {
+        setTimeout(function () { reject(new Error("timeout")); }, ms);
+      })
+    ]);
+  }
 
-          var n = res.value ?? res.Count ?? res.count;
-          el.textContent = n;
-        } catch (e) {
-          el.textContent = "-";
-        }
-      })();
+  async function hitung() {
+    var counter = new Counter({ workspace: "dimasstory-web" });
+    var seen = false;
+    try { seen = localStorage.getItem("visited") === "1"; } catch (e) {}
+
+    var res;
+    if (seen) {
+      try { res = await counter.get("pengunjung"); }
+      catch (e) { res = await counter.up("pengunjung"); }
+    } else {
+      res = await counter.up("pengunjung");
+      try { localStorage.setItem("visited", "1"); } catch (e) {}
+    }
+
+    var n = Number(res.value ?? res.Count ?? res.count);
+    if (!isFinite(n)) throw new Error("angka tidak valid");
+    return n;
+  }
+
+  try {
+    var n = await withTimeout(hitung(), 6000);
+    el.textContent = n.toLocaleString("id-ID");
+    box.hidden = false; // tampilkan hanya kalau berhasil
+  } catch (e) {
+    // Gagal: kotak tetap tersembunyi, tidak ada tulisan error di halaman
+  }
+})();
     })();
   </script>
 
